@@ -1,0 +1,65 @@
+header {
+    background-color: #111;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    padding: 10px;
+}
+header h3 {
+    font-family: 'Boogaloo', cursive;
+    font-size: 40px;
+    display: inline;
+    color: whitesmoke;
+}
+header ul {
+    float: right;
+}
+header a {
+    color: whitesmoke;
+    font-weight: bold;
+}
+
+#slideout {
+    height: 100%;
+    width: 0;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    right: 0;
+    background-color: darkseagreen;
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+#slideout .btn {
+    margin: 10px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#slideout h2 {
+    font-family: 'Boogaloo', cursive;
+    font-size: 36px;
+    color: whitesmoke;
+    margin-left: 15px;
+    margin-bottom: 25px;
+    padding: 5px;
+}
+
+#slideout .list-group-item {
+    background-color: whitesmoke;
+    border-top: 1px solid #111;
+    border-bottom: 1px solid #111;
+}
+.container .btn {
+    background-color: darkseagreen;
+    margin-top: 100px;
+    padding: 20px 100px 20px 100px;
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 25px;
+}
+.container .form-control {
+    margin-top: 20px;
+    width: 60%;
+}
