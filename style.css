@@ -51,15 +51,25 @@ header a {
     border-top: 1px solid #111;
     border-bottom: 1px solid #111;
 }
-.container .btn {
+
+#search {
+    padding-bottom: 40px;
+    border-bottom: 4px solid darkseagreen;
+}
+#search .btn {
     background-color: darkseagreen;
-    margin-top: 100px;
-    padding: 20px 100px 20px 100px;
+    margin-top:150px;
+    width: 60%;
+    padding: 20px 0px 20px 0px;
     color: whitesmoke;
     font-weight: bold;
     font-size: 25px;
 }
-.container .form-control {
+#search .form-control {
     margin-top: 20px;
     width: 60%;
+}
+
+#results .panel {
+    margin-top: 20px;
 }
