@@ -52,6 +52,11 @@ header a {
     border-bottom: 1px solid #111;
 }
 
+.about {
+    margin-top: 150px;
+    margin-left: 20px;
+}
+
 #search {
     padding-bottom: 40px;
     border-bottom: 4px solid darkseagreen;
