@@ -23,9 +23,9 @@
                 <li role="presentation"><a href="#" onclick="openSide()">My List</a></li>
             </ul>
         </header>
-        <div class="container" id="search">
-            <button class="btn btn-default center-block" id="generator">Let's Generate Some Recipes!</button>
-            <textarea class="form-control center-block" rows="5" placeholder="Look for these specific ingredients..."></textarea>
+        <div class="container" id="search" ng-controller="generatorCtrl">
+            <button class="btn btn-default center-block" id="generator" ng-click="getData()">Let's Generate Some Recipes!</button>
+            <textarea class="form-control center-block" rows="5" placeholder="Look for these specific ingredients..." ng-model="ingredients"></textarea>
         </div>
         <div class="container" id="results" ng-controller="resultsCtrl">
             <div class="row">
@@ -73,6 +73,7 @@
             <!-- Angular controllers -->
             <script src="resultsController.js" type="text/javascript"></script>
             <script src="listController.js" type="text/javascript"></script>
+            <script src="generatorController.js" type="text/javascript"></script>
         </div>
     </body>
 </html>

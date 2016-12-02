@@ -1,4 +1,4 @@
-mainApp.controller('resultsCtrl', ['$scope', function($scope){ 
+mainApp.controller('resultsCtrl', ['$scope', function($scope, $filter, Results){ 
     $scope.results = [ 
     {
         title: "Chicken",
