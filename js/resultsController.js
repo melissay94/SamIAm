@@ -36,6 +36,8 @@ mainApp.controller('resultsCtrl', ['$scope', function($scope, $filter, Results){
         link: "exampleLink",
         img: "nothing.jpg"
     }]
+    
+    console.log("Hey there: " + Results);
 
     $scope.setDay = function(day, recipe) {
         

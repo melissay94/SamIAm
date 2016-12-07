@@ -1,12 +1,11 @@
 
-    var results;
-
 mainApp.controller('generatorCtrl', ["$scope", function($scope){
     
-    $scope.ingredients = [];
+    $scope.results = [];
     
     $scope.getData = function() {
         // Build up search query. For now, just do it with a random number and not the specifics 
+        var my_data;
         var url = "http://www.recipepuppy.com/api/?";
         var randPageNum = Math.floor(Math.random() * 100 + 1);
 
@@ -15,24 +14,23 @@ mainApp.controller('generatorCtrl', ["$scope", function($scope){
 
         // Call the service and download the results
         $.getJSON('https://crossorigin.me/http://www.recipepuppy.com/api/', function(data){
-            dataFetched(data);
+            my_data = dataFetched(data);
+            console.log("Inside: " , my_data);
+            
         });
+        console.log(my_data);
+        $scope.results.push({title: "Example 2", ingredients: "example 2"});
     }
     
     // Fetched data let's look
     function dataFetched(obj){
-        console.log("What we got: ", obj.results);
 
         if (obj.results.length == 0) {
             var status = "No recipes found";
         }
         
         else {
-            results = obj.results;
+            return obj.results;
         }
     }
 }]);
-
-mainApp.factory('Results', function($filter) {
-   return results; 
-});
