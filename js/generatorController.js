@@ -1,15 +1,15 @@
 
-mainApp.controller('generatorCtrl', ["$scope", function($scope){
+mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
     
     $scope.results = [];
     
     $scope.getData = function() {
         // Build up search query. For now, just do it with a random number and not the specifics 
         var my_data;
-        var url = "https://crossorigin.me/http://www.recipepuppy.com/api/";
+        var url = "/?url=http://www.recipepuppy.com/api";
         var randPageNum = Math.floor(Math.random() * 100 + 1);
 
-        //url += "p=" + randPageNum.toString();
+        url += "p=" + randPageNum.toString();
         console.log("results: " + url);
 
         // Call the service and download the results
@@ -18,16 +18,17 @@ mainApp.controller('generatorCtrl', ["$scope", function($scope){
             localStorage.test = JSON.stringify(my_data);
             console.log(my_data, " ", url)
         });**/
-        console.log("my page: ", randPageNum);
-        $.ajax({
+        //console.log("my page: ", randPageNum);
+        /*$.ajax({
             dataType: "json",
             url: url,
-            data: {"i": "onions, garlic","p": randPageNum.toString()},
+            data: {"p": randPageNum.toString()},
             success: dataFetched
-        });
+        });*/
+
+        $http.get("http://www.recipepuppy.com/api/?p=47").then(dataFetched);
         
         my_data = JSON.parse(localStorage.test);
-        console.log("wtf ", my_data)
         $scope.results = my_data.results;
         console.log("trying something: ", $scope.results);
     }
@@ -40,7 +41,7 @@ mainApp.controller('generatorCtrl', ["$scope", function($scope){
         }
         
         else {
-            localStorage.test = JSON.stringify(obj);
+            localStorage.test = JSON.stringify(obj.data);
             console.log('Data: ' + localStorage.test);
         }
     }

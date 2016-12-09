@@ -76,7 +76,8 @@ var onRequest = function(request, response) {
     try {
         // Writes 200 status and sends CORS header to allow access for the client
         response.writeHead(200, responseHeaders);
-        requester(params.url).pipe(response);
+        requester(params.url + '?p=' + params.p).pipe(response);
+        console.log('resulting url: ', params.url + '?p=' + params.p);
     }
     catch(exception) {
         // If the URL is invalid, 500 error sent
@@ -125,6 +126,9 @@ var getController = function(request, response) {
     response.write(controller);
     response.end();
 }
+
+// Gets list controller
+/* var getListCtrl = function(requests, response) */
 
 // Create the server and sends those requests on their way
 http.createServer(onRequest).listen(port);

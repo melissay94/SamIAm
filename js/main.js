@@ -9,3 +9,8 @@ function openSide() {
 function closeSide() {
     document.getElementById("slideout").style.width = "0";
 }
+
+mainApp.config(['$httpProvider', function($httpProvider) {
+	$httpProvider.defaults.useXDomain = true;
+	delete $httpProvider.defaults.headers.common['X-Requested-With'];
+}]);
