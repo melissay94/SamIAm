@@ -1,7 +1,8 @@
 
 mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
     
-    $scope.results = [];
+    $scope.results = []; 
+    $scope.currentList = ["Nothing chosen", "Nothing chosen", "Nothing chosen", "Nothing chosen", "Nothing chosen"];
     
     $scope.getData = function() {
         // Build up search query. For now, just do it with a random number and not the specifics 
@@ -32,5 +33,9 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
         else {
             localStorage.test = JSON.stringify(obj);
         }
+    }
+    
+    $scope.datePick = function(day, recipe) {
+        console.log("Day: ", day, " Recipe: ", recipe);
     }
 }]);

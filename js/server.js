@@ -43,6 +43,9 @@ var onRequest = function(request, response) {
                 case '/':
                     getIndex(request, response);
                     break;
+                case '/about.html':
+                    getAbout(request, response);
+                    break;
                 case '/style.css':
                     getCSS(request, response);
                     break;
@@ -57,7 +60,9 @@ var onRequest = function(request, response) {
                     break;
                 // If no url matches, sends the following message
                 default:
-                    console.log("Request not found: ", request.url);
+                    getIndex(request, response);
+                    if (request.url != '/index.html')
+                        console.log("Request not found: ", request.url);
                     break;
 
             }
@@ -104,6 +109,13 @@ var getIndex = function(request, response) {
     response.write(index);
     response.end();
 };
+
+var getAbout = function(request, response) {
+    var about = fs.readFileSync(__dirname + "/../about.html");
+    response.writeHead(200, { 'Content-type': 'text/html'});
+    response.write(about);
+    response.end();
+}
 
 // Gets the styles for the site
 var getCSS = function(request, response) {

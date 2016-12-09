@@ -80,7 +80,6 @@ header a {
     margin-top: 20px;
     min-height: 400px;
 }
-
 #results h3 {
     font-weight: bold;
 }
@@ -90,4 +89,11 @@ header a {
 #results img {
     height: 100px;
     width: 100px;
+}
+#results .btn-group {
+    margin-top:15px;
+}
+#results .btn {
+    padding: 20px;
+    max-width: 60px;
 }

@@ -37,24 +37,26 @@
                                 <div class="col-md-4">
                                     <img src="{{ result.thumbnail }}" alt="Pic of food" onerror="this.src='default-img.png'" />
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-8">
                                     <a href="{{ result.href }}" target="_blank">Instructions here</a>
                                     <p>Uses: {{ result.ingredients }}</p>
                                 </div>
                             </div>
-                            <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default">M</button>
-                                <button type="button" class="btn btn-default">Tu</button>
-                                <button type="button" class="btn btn-default">W</button>
-                                <button type="button" class="btn btn-default">Th</button>
-                                <button type="button" class="btn btn-default">F</button>
+                            <div class="wrapper text-center">
+                                <div class="btn-group" role="group">
+                                    <button type="button" class="btn btn-default" ng-click="datePick('Monday', 'result')">M</button>
+                                    <button type="button" class="btn btn-default">Tu</button>
+                                    <button type="button" class="btn btn-default">W</button>
+                                    <button type="button" class="btn btn-default">Th</button>
+                                    <button type="button" class="btn btn-default">F</button>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div id="slideout" ng-controller="listCtrl">
+        <div id="slideout">
             <button class="btn btn-default" onclick="closeSide()">X</button>
             <h2>My Shopping List</h2>
             <ul class="list-group">
