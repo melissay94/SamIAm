@@ -78,7 +78,7 @@ header a {
 
 #results .panel {
     margin-top: 20px;
-    min-height: 200px;
+    min-height: 400px;
 }
 
 #results h3 {
@@ -86,4 +86,8 @@ header a {
 }
 #results a {
     color: seagreen;
+}
+#results img {
+    height: 100px;
+    width: 100px;
 }

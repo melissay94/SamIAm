@@ -52,6 +52,9 @@ var onRequest = function(request, response) {
                 case '/js/generatorController.js':
                     getController(request, response);
                     break;
+                case '/default-img.png':
+                    getDefaultImg(request, response);
+                    break;
                 // If no url matches, sends the following message
                 default:
                     console.log("Request not found: ", request.url);
@@ -77,7 +80,6 @@ var onRequest = function(request, response) {
         // Writes 200 status and sends CORS header to allow access for the client
         response.writeHead(200, responseHeaders);
         requester(params.url + '?p=' + params.p).pipe(response);
-        console.log('resulting url: ', params.url + '?p=' + params.p);
     }
     catch(exception) {
         // If the URL is invalid, 500 error sent
@@ -124,6 +126,13 @@ var getController = function(request, response) {
     var controller = fs.readFileSync(__dirname + "/../js/generatorController.js");
     response.writeHead(200, { 'Content-type' : 'application/javascript'});
     response.write(controller);
+    response.end();
+}
+
+var getDefaultImg = function(request, response) {
+    var img = fs.readFileSync(__dirname + "/../default-img.png");
+    response.writeHead(200, { 'Content-type': 'image/png'});
+    response.write(img);
     response.end();
 }
 
