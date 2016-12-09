@@ -13,7 +13,7 @@ mainApp.controller('generatorCtrl', ["$scope", function($scope){
         console.log("results: " + url);
 
         // Call the service and download the results
-        $.getJSON('https://crossorigin.me/http://www.recipepuppy.com/api/', function(data){
+        $.getJSON('http://www.recipepuppy.com/api/', function(data){
             my_data = dataFetched(data);
             console.log("Inside: " , my_data);
             
