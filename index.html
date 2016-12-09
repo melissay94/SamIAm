@@ -33,7 +33,15 @@
                     <div class="panel panel-default">
                         <div class="panel-heading"><h3 class="panel-title">{{ result.title }}</h3></div>
                         <div class="panel-body">
-                            <p>{{ result.ingredients }}</p>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="{{ result.thumbnail }}" alt="Pic of food"  />
+                                </div>
+                                <div class="col-md-6">
+                                    <a href="{{ result.href }}" target="_blank">Instructions here</a>
+                                    <p>Uses: {{ result.ingredients }}</p>
+                                </div>
+                            </div>
                             <div class="btn-group" role="group">
                                 <button type="button" class="btn btn-default">M</button>
                                 <button type="button" class="btn btn-default">Tu</button>
