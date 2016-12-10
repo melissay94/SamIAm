@@ -10,6 +10,7 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
         {title: "Friday", recipes: [] }];
 
     $scope.shoppingList = [];
+    var nutriObj;
     
     $scope.getData = function() {
         // Build up search query. For now, just do it with a random number and not the specifics 
@@ -43,22 +44,52 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
     // Organizes selected recipes
     $scope.datePick = function(day, recipe) {
 
+        var ingredientsList = recipe.ingredients.split(',');
+
         // Add the recipe to the schedule
         for (var i = 0; i < $scope.currentList.length; i++) {
             if ($scope.currentList[i].title == day){
+                var nutriTotal = 0;
+                ingredientsList.forEach(function(element){
+                    getNutrionFacts(element);
+                    nutriTotal += nutriObj.nf_calories;
+                });
+                recipe.calories = nutriTotal;
                 $scope.currentList[i].recipes.push(recipe);
                 break;
             }
         }
 
-        var ingredientsList = recipe.ingredients.split(',');
-
         // Adds those ingredients to the shopping list
         for (var j = 0; j < ingredientsList.length; j++){
             var itemIndex = $scope.shoppingList.indexOf(ingredientsList[j])
-            
+
             if ( itemIndex == -1)
                 $scope.shoppingList.push(ingredientsList[j]);
         }
     }
+
+    function getNutrionFacts(grocery) {
+
+        var url = 'https://api.nutritionix.com/v1_1/search/';
+        var back_of_url = '?fields=item_name%2Cnf_calories%2Cnf_total_fat&appId=5b9d1f2f&appKey=830e2427691b3eaf5886473c8c0bbc5e';
+        grocery = encodeURI(grocery.toLowerCase());
+        url += grocery;
+        url += back_of_url;
+
+        $.ajax({
+            dataType: 'json',
+            url: url,
+            data: null,
+            success: nutrionFetch
+        });
+    }
+
+    function nutrionFetch(obj) {
+        var result = obj.hits[0].fields
+        if(result) {
+            nutriObj = result;
+        }
+    }
+
 }]);
