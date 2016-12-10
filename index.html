@@ -20,7 +20,7 @@
             <ul class="nav nav-pills">
                 <li role="presentation"><a href="#">Home</a></li>
                 <li role="presentation"><a href="about.html">About</a></li>
-                <li role="presentation"><a href="#" onclick="openSide()">My Recipes</a></li>
+                <li role="presentation"><a href="#" id="sliderButton">My Recipes</a></li>
             </ul>
         </header>
         <div class="container" id="search">
@@ -56,9 +56,9 @@
             </div>
         </div>
         <div id="slideout">
-            <button class="btn btn-default" onclick="closeSide()"><span class="glyphicon glyphicon-remove"></span></button>
-            <button class="btn btn-default" onclick="changeView()"><span class="glyphicon glyphicon-calendar"></span></button>
-            <button class="btn btn-default" onclick="changeView()"><span class="glyphicon glyphicon-shopping-cart"></span></button>
+            <button class="btn btn-default" id="closeSlider"><span class="glyphicon glyphicon-remove"></span></button>
+            <button class="btn btn-default" id="calendarButton"><span class="glyphicon glyphicon-calendar"></span></button>
+            <button class="btn btn-default" id="listButton"><span class="glyphicon glyphicon-shopping-cart"></span></button>
             <div id="recipeSchedule">
                 <h2>My Recipe Schedule</h2>
                 <ul class="list-group">
