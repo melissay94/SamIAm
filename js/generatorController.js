@@ -2,6 +2,14 @@
 mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
     
     $scope.results = [];
+    $scope.recipeList = [
+        {day: "Monday", meals: []}, 
+        {day: "Tuesday", meals: []}, 
+        {day: "Wednesday", meals: []}, 
+        {day: "Thursday", meals: []}, 
+        {day: "Friday", meals: []}
+    ];
+    $scope.foodList = [];
     
     $scope.getData = function() {
         // Build up search query. For now, just do it with a random number and not the specifics 
@@ -29,7 +37,13 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
         $http.get("http://www.recipepuppy.com/api/?p=47").then(dataFetched);
         
         my_data = JSON.parse(localStorage.test);
-        $scope.results = my_data.results;
+        // $scope.results = my_data.results;
+        $scope.results = [
+            { title: "Mexican Fiesta Bowl", ingredients: "Chicken Breasts, White Rice, Garlic, Black Beans, Limes, Bell Peppers, Red Onions, Diced Tomatoes, Corn"},
+            { title: "American StirFry", ingredients: "Chicken Breasts or Pork Chops, White Rice, StirFry Sauce, White Onions, Bell Peppers, Broccoli, Carrots, Water Chestnuts, Baby Corn"},
+            { title: "Brazilian Okra Stew", ingredients: "Chunk Steak, White Rice, Diced Tomatoes, Okra, Garlic, White Onions"}, 
+            { title: "Mamazinha's Cheese Bread", ingredients: "Cheese bread flour, chedder jack cheese, bell peppers, ham, eggs, water"}
+            ];
         console.log("trying something: ", $scope.results);
     }
     
@@ -44,5 +58,24 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
             localStorage.test = JSON.stringify(obj.data);
             console.log('Data: ' + localStorage.test);
         }
+    }
+
+    // Need to add functionality for buttons
+    $scope.daySelect = function(day, recipe) {
+        
+        // First, when the button is clicked, get that week day from scope.results
+        
+
+        // Next, get that weeks meal list & check if that recipe is already there
+
+        // If it isn't add it to the meals list
+
+        // Send the title of the recipe to the view for the schedule made
+            // Should display as a drop down using ng-repeat
+
+        // Send the ingredients of the recipe to the shopping list
+            // Check the lists for if those ingredients are already there
+            // If not, append it as a key value of "food":"occurance = 1"
+            // If yes, iterate the occurance value of that food up one
     }
 }]);

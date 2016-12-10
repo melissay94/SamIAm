@@ -43,7 +43,7 @@
                                 </div>
                             </div>
                             <div class="btn-group" role="group">
-                                <button type="button" class="btn btn-default">M</button>
+                                <button type="button" class="btn btn-default" ng-click="daySelect('Monday')">M</button>
                                 <button type="button" class="btn btn-default">Tu</button>
                                 <button type="button" class="btn btn-default">W</button>
                                 <button type="button" class="btn btn-default">Th</button>
@@ -54,26 +54,28 @@
                 </div>
             </div>
         </div>
-        <div id="slideout" ng-controller="listCtrl">
+        <div id="slideout">
             <button class="btn btn-default" onclick="closeSide()">X</button>
-            <h2>My Shopping List</h2>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <h4>Monday: {{ currentList[0] }}</h4>
-                </li>
-                <li class="list-group-item">
-                    <h4>Tuesday: {{ currentList[1] }}</h4>
-                </li>
-                <li class="list-group-item">
-                    <h4>Wednesday: {{ currentList[2] }}</h4>
-                </li>
-                <li class="list-group-item">
-                    <h4>Thursday: {{ currentList[3] }}</h4>
-                </li>
-                <li class="list-group-item">
-                    <h4>Friday: {{ currentList[4] }}</h4>
-                </li>
-            </ul>
+            <button class="btn btn-default" onclick="switchView()">R</button>
+            <button class="btn btn-default" onclick="switchView()">S</button>
+            <div id="recipeSchedule" style="display:block">
+                <h2>My Recipe Schedule</h2>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="item in recipeList">
+                        <h4>{{ item.day }}</h4>
+                        <p ng-repeat="recipe in item.meals">{{ recipe.title }}</p>
+                    </li>
+                </ul>
+            </div>
+            <div id="shoppingList" style="display:none">
+                <h2>My Shopping List</h2>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="food in foodList">
+                        <h4>{{ food.name }}</h4>
+                        <p>X {{ food.occurances }}</p>
+                    </li>
+                </ul>
+            </div>
         </div>
             <!-- Angular app module -->
             <script src="/js/main.js" type="text/javascript"></script>
