@@ -46,7 +46,11 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
                 ];
             } 
             else {
-                $scope.results = my_data.results;
+                $scope.$apply(function(){
+                    $scope.results = my_data.results;
+                
+                });
+                console.log($scope.results);
             }
         }
     }
@@ -54,6 +58,8 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
 
     // Organizes selected recipes
     $scope.datePick = function(day, recipe) {
+
+        console.log("Hi, ", day );
 
         var ingredientsList = recipe.ingredients.split(',');
 
@@ -65,7 +71,7 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
                 $scope.shoppingList.push(ingredientsList[j]);
         }
 
-        // Add the recipe to the schedule
+        // Adds the recipe to the schedule
         for (var i = 0; i < $scope.currentList.length; i++) {
             if ($scope.currentList[i].title == day){
                 var nutriTotal = 0;
@@ -81,6 +87,7 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
 
     }
 
+    // Retrieves calories from the Nutritionix API
     function getNutrionFacts(grocery) {
 
         var url = 'https://api.nutritionix.com/v1_1/search/';
@@ -97,11 +104,13 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
         });
     }
 
+    // Assigns results to a value
     function nutrionFetch(obj) {
         var result = obj.hits[0].fields
         if(result) {
             nutriObj = result;
-        }
+
+        } 
     }
 
 }]);
