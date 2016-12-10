@@ -25,7 +25,6 @@
         </header>
         <div class="container" id="search">
             <button class="btn btn-default center-block" id="generator" ng-click="getData()">Let's Generate Some Recipes!</button>
-            <textarea class="form-control center-block" rows="5" placeholder="Look for these specific ingredients..." ng-model="ingredients"></textarea>
         </div>
         <div class="container" id="results">
             <div class="row">
@@ -44,11 +43,11 @@
                             </div>
                             <div class="wrapper text-center">
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-default" ng-click="datePick('Monday', 'result')">M</button>
-                                    <button type="button" class="btn btn-default">Tu</button>
-                                    <button type="button" class="btn btn-default">W</button>
-                                    <button type="button" class="btn btn-default">Th</button>
-                                    <button type="button" class="btn btn-default">F</button>
+                                    <button type="button" class="btn btn-default" ng-click="datePick('Monday', result)">M</button>
+                                    <button type="button" class="btn btn-default" ng-click="datePick('Tuesday', result)">Tu</button>
+                                    <button type="button" class="btn btn-default" ng-click="datePick('Wednesday', result)">W</button>
+                                    <button type="button" class="btn btn-default" ng-click="datePick('Thursday', result)">Th</button>
+                                    <button type="button" class="btn btn-default" ng-click="datePick('Friday', result)">F</button>
                                 </div>
                             </div>
                         </div>
@@ -58,24 +57,27 @@
         </div>
         <div id="slideout">
             <button class="btn btn-default" onclick="closeSide()">X</button>
-            <h2>My Shopping List</h2>
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <h4>Monday: {{ currentList[0] }}</h4>
-                </li>
-                <li class="list-group-item">
-                    <h4>Tuesday: {{ currentList[1] }}</h4>
-                </li>
-                <li class="list-group-item">
-                    <h4>Wednesday: {{ currentList[2] }}</h4>
-                </li>
-                <li class="list-group-item">
-                    <h4>Thursday: {{ currentList[3] }}</h4>
-                </li>
-                <li class="list-group-item">
-                    <h4>Friday: {{ currentList[4] }}</h4>
-                </li>
-            </ul>
+            <button class="btn btn-default" onclick="changeView()">R</button>
+            <button class="btn btn-default" onclick="changeView()">S</button>
+            <div id="recipeSchedule">
+                <h2>My Recipe Schedule</h2>
+                <ul class="list-group">
+                    <li class="list-group-item" ng-repeat="day in currentList">
+                        <h4>{{ day.title }}:</h4>
+                        <ul>
+                            <li ng-repeat="item in day.recipes">{{ item.title }}
+                                <a href="{{ result.href }}" target="_blank">Instructions here</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div id="shoppingList" style="display: none">
+                <h2>My Shopping List</h2>
+                <ul>
+                    <li ng-repeat="item in shoppingList">{{ item }}</li>
+                </ul>
+            </div>
         </div>
             <!-- Angular app module -->
             <script src="/js/main.js" type="text/javascript"></script>

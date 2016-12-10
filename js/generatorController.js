@@ -2,7 +2,14 @@
 mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
     
     $scope.results = []; 
-    $scope.currentList = ["Nothing chosen", "Nothing chosen", "Nothing chosen", "Nothing chosen", "Nothing chosen"];
+    $scope.currentList = [
+        {title: "Monday", recipes: [] },
+        {title: "Tuesday", recipes: [] },
+        {title: "Wednesday", recipes: [] },
+        {title: "Thursday", recipes: [] },
+        {title: "Friday", recipes: [] }];
+
+    $scope.shoppingList = [];
     
     $scope.getData = function() {
         // Build up search query. For now, just do it with a random number and not the specifics 
@@ -16,8 +23,6 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
             data: {"p": randPageNum.toString()},
             success: dataFetched
         });
-
-        //$http.get("http://www.recipepuppy.com/api/?p=47").then(dataFetched);
         
         my_data = JSON.parse(localStorage.test);
         $scope.results = my_data.results;
@@ -34,8 +39,26 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
             localStorage.test = JSON.stringify(obj);
         }
     }
-    
+
+    // Organizes selected recipes
     $scope.datePick = function(day, recipe) {
-        console.log("Day: ", day, " Recipe: ", recipe);
+
+        // Add the recipe to the schedule
+        for (var i = 0; i < $scope.currentList.length; i++) {
+            if ($scope.currentList[i].title == day){
+                $scope.currentList[i].recipes.push(recipe);
+                break;
+            }
+        }
+
+        var ingredientsList = recipe.ingredients.split(',');
+
+        // Adds those ingredients to the shopping list
+        for (var j = 0; j < ingredientsList.length; j++){
+            var itemIndex = $scope.shoppingList.indexOf(ingredientsList[j])
+            
+            if ( itemIndex == -1)
+                $scope.shoppingList.push(ingredientsList[j]);
+        }
     }
 }]);
