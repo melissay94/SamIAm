@@ -10,8 +10,8 @@ var mainApp = angular.module("mainApp", []);
 	window.onload = function() {
 		document.querySelector('#sliderButton').onclick=openSide;
 		document.querySelector('#closeSlider').onclick=closeSide;
-		document.querySelector('#calendarButton').onclick=changeView;
-		document.querySelector('#listButton').onclick=changeView;
+		document.querySelector('#calendarButton').onclick=recipeView;
+		document.querySelector('#listButton').onclick=shoppingView;
 	}
 
 	// Controls the sliding out summary box
@@ -24,8 +24,8 @@ var mainApp = angular.module("mainApp", []);
 	}
 
 	// Changes if you're looking at the shopping list or the recipes
-	function changeView() {
-		console.log("Hello");
+	function recipeView() {
+		
 		var element_1 = document.getElementById("recipeSchedule");
 		var element_2 = document.getElementById("shoppingList");
 
@@ -33,10 +33,17 @@ var mainApp = angular.module("mainApp", []);
 			element_1.style.display = "block";
 			element_2.style.display = "none";
 		}
-		else {
-			element_1.style.display = "none";
-			element_2.style.display = "block";
-		}
 	}
+    
+    function shoppingView() {
+        
+        var element_1 = document.getElementById("recipeSchedule");
+		var element_2 = document.getElementById("shoppingList");
+
+		if (element_2.style.display == "none"){
+			element_2.style.display = "block";
+			element_1.style.display = "none";
+		}
+    }
 
 })();
