@@ -65,9 +65,17 @@
                     <li class="list-group-item" ng-repeat="day in currentList">
                         <h4>{{ day.title }}:</h4>
                         <ul>
-                            <li ng-repeat="item in day.recipes">{{ item.title }}
-                                <a href="{{ result.href }}" target="_blank">Instructions here</a>
-                                <p>This dish has about {{ item.calories }} calories in it</p>
+                            <li ng-repeat="item in day.recipes">
+                                <div class="row">
+                                    <div class="col-sm-9">
+                                        <p>{{ item.title }}</p>
+                                        <a href="{{ result.href }}" target="_blank">Instructions here</a>
+                                        <p>This dish has about {{ item.calories }} calories in it</p>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <button class="btn btn-default removeBtn" ng-click="removeRecipe(day.title, item)"><span class="glyphicon glyphicon-remove"></span></button>
+                                    </div>
+                                </div>
                             </li>
                         </ul>
                     </li>

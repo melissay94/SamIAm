@@ -50,7 +50,6 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
                     $scope.results = my_data.results;
                 
                 });
-                console.log($scope.results);
             }
         }
     }
@@ -58,8 +57,6 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
 
     // Organizes selected recipes
     $scope.datePick = function(day, recipe) {
-
-        console.log("Hi, ", day );
 
         var ingredientsList = recipe.ingredients.split(',');
 
@@ -85,6 +82,20 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
             }
         }
 
+    }
+    
+    // Removes selected recipe
+    $scope.removeRecipe = function(day, item) {
+        // Takes the recipe out of the schedule
+        for (var i = 0; i < $scope.currentList.length; i++) {
+            if ($scope.currentList[i].title == day){
+                var index = $scope.currentList[i].recipes.indexOf(item);
+                $scope.currentList[i].recipes.splice(index, 1);
+            }
+        }
+        
+        // Removes ingredients from shopping list
+        console.log($scope.shoppingList);
     }
 
     // Retrieves calories from the Nutritionix API

@@ -32,10 +32,21 @@ header a {
     transition: 0.5s;
 }
 
+#slideout li{
+    list-style: none;
+}
+
 #slideout .btn {
     margin: 10px;
     font-size: 15px;
     font-weight: bold;
+}
+
+#slideout .removeBtn {
+    background: none;
+    border: none;
+    margin-top: 0px;
+    padding: 0px;
 }
 
 #slideout h2 {
