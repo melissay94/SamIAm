@@ -71,12 +71,6 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
         // Adds the recipe to the schedule
         for (var i = 0; i < $scope.currentList.length; i++) {
             if ($scope.currentList[i].title == day){
-                var nutriTotal = 0;
-                ingredientsList.forEach(function(element){
-                    getNutrionFacts(element);
-                    nutriTotal += nutriObj.nf_calories;
-                });
-                recipe.calories = Math.round(nutriTotal);
                 $scope.currentList[i].recipes.push(recipe);
                 break;
             }
@@ -96,32 +90,6 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
         
         // Removes ingredients from shopping list
         console.log($scope.shoppingList);
-    }
-
-    // Retrieves calories from the Nutritionix API
-    function getNutrionFacts(grocery) {
-
-        var url = 'https://api.nutritionix.com/v1_1/search/';
-        var back_of_url = '?fields=item_name%2Cnf_calories%2Cnf_total_fat&appId=5b9d1f2f&appKey=830e2427691b3eaf5886473c8c0bbc5e';
-        grocery = encodeURI(grocery.toLowerCase());
-        url += grocery;
-        url += back_of_url;
-
-        $.ajax({
-            dataType: 'json',
-            url: url,
-            data: null,
-            success: nutrionFetch
-        });
-    }
-
-    // Assigns results to a value
-    function nutrionFetch(obj) {
-        var result = obj.hits[0].fields
-        if(result) {
-            nutriObj = result;
-
-        } 
     }
 
 }]);

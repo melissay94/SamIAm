@@ -8,5 +8,4 @@ The project is currently being hosted on Heroku [here](https://samiamrecipes.her
 * Jquery
 * Boogaloo Font from Google fonts
 * [Recipe Puppy API](http://www.recipepuppy.com/about/api/)
-* [Nutrionix API](https://www.nutritionix.com/business/api?gclid=CM-bj6b8iNECFdJMDQod6oAAFA)
 
