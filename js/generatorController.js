@@ -2,6 +2,7 @@
 mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
     
     $scope.results = []; 
+	
     $scope.currentList = [
         {title: "Monday", recipes: [] },
         {title: "Tuesday", recipes: [] },
@@ -10,6 +11,7 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
         {title: "Friday", recipes: [] }];
 
     $scope.shoppingList = [];
+	
     var nutriObj;
     
     $scope.getData = function() {
@@ -55,41 +57,74 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
     }
 
 
-    // Organizes selected recipes
-    $scope.datePick = function(day, recipe) {
+	// Organizes selected recipes
+	$scope.datePick = function(day, recipe) {
 
-        var ingredientsList = recipe.ingredients.split(',');
+		// Split up string of ingredients
+		var ingredientsList = recipe.ingredients.split(',');
 
-        // Adds those ingredients to the shopping list
-        for (var j = 0; j < ingredientsList.length; j++){
-            var itemIndex = $scope.shoppingList.indexOf(ingredientsList[j])
+		// If the list has nothing, add the first item, and set to 0 because it'll get iterated in the check loops
+		if ($scope.shoppingList.length === 0)
+			$scope.shoppingList.push({ name: ingredientsList[0], count: 0});
 
-            if ( itemIndex == -1)
-                $scope.shoppingList.push(ingredientsList[j]);
-        }
+		// Cycle through shoppingList to see if an ingredient already exists
+		for (var i = 0; i < $scope.shoppingList.length; i++) {
+			var itemIndex = ingredientsList.indexOf($scope.shoppingList[i].name);
 
-        // Adds the recipe to the schedule
-        for (var i = 0; i < $scope.currentList.length; i++) {
-            if ($scope.currentList[i].title == day){
-                $scope.currentList[i].recipes.push(recipe);
-                break;
-            }
-        }
+			// If the item exists iterate its count and remove that item from ingredients list
+			if (itemIndex >= 0) {
+				$scope.shoppingList[i].count++;
+				ingredientsList.splice(itemIndex, 1);
+			}					
+		}
 
-    }
+		// For the remaining ingredients, just push them to the shopping list
+		for (var i = 0; i < ingredientsList.length; i++) {
+			$scope.shoppingList.push({ name: ingredientsList[i], count: 1});
+		}
+
+		// Adds the recipe to the schedule
+		for (var i = 0; i < $scope.currentList.length; i++) {
+			if ($scope.currentList[i].title == day){
+				$scope.currentList[i].recipes.push(recipe);
+				break;
+			}
+		}
+	}
+	
     
-    // Removes selected recipe
-    $scope.removeRecipe = function(day, item) {
-        // Takes the recipe out of the schedule
-        for (var i = 0; i < $scope.currentList.length; i++) {
-            if ($scope.currentList[i].title == day){
-                var index = $scope.currentList[i].recipes.indexOf(item);
-                $scope.currentList[i].recipes.splice(index, 1);
-            }
-        }
-        
-        // Removes ingredients from shopping list
-        console.log($scope.shoppingList);
-    }
+	// Removes selected recipe
+	$scope.removeRecipe = function(day, item) {
+		
+				// Removes ingredients from shopping list
+		var ingredientsList = item.ingredients.split(',');
+		
+		// Shopping list should never be zero cause you can't delete what you didn't add
+		for (var i = 0; i < $scope.shoppingList.length; i++) {
+			console.log("iterate: ", i);
+				// Get index of item on list to be deleted
+				var itemIndex = ingredientsList.indexOf($scope.shoppingList[i].name);
+			
+				// Only lower the count if the item exists from the items to be deleted
+				if (itemIndex >= 0) {
+					$scope.shoppingList[i].count--;
+			
+					// If the count becomes zero, remove it from the shopping list
+					if ($scope.shoppingList[i].count === 0) {
+						console.log($scope.shoppingList[i]);
+						$scope.shoppingList.splice(i,1);
+					}
+				}
+		}
+		
+		console.log($scope.shoppingList);
+		// Takes the recipe out of the schedule
+		for (var i = 0; i < $scope.currentList.length; i++) {
+			if ($scope.currentList[i].title == day){
+				var index = $scope.currentList[i].recipes.indexOf(item);
+				$scope.currentList[i].recipes.splice(index, 1);
+			}
+		}
+	}
 
 }]);
