@@ -96,25 +96,27 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
 	// Removes selected recipe
 	$scope.removeRecipe = function(day, item) {
 		
-				// Removes ingredients from shopping list
+		// Removes ingredients from shopping list
 		var ingredientsList = item.ingredients.split(',');
 		
 		// Shopping list should never be zero cause you can't delete what you didn't add
 		for (var i = 0; i < $scope.shoppingList.length; i++) {
-			console.log("iterate: ", i);
-				// Get index of item on list to be deleted
-				var itemIndex = ingredientsList.indexOf($scope.shoppingList[i].name);
-			
-				// Only lower the count if the item exists from the items to be deleted
-				if (itemIndex >= 0) {
-					$scope.shoppingList[i].count--;
-			
-					// If the count becomes zero, remove it from the shopping list
-					if ($scope.shoppingList[i].count === 0) {
-						console.log($scope.shoppingList[i]);
-						$scope.shoppingList.splice(i,1);
-					}
+
+			// Get index of item on list to be deleted
+			var itemIndex = ingredientsList.indexOf($scope.shoppingList[i].name);
+			console.log("Iteration: ", itemIndex, " itemIndex: ", itemIndex);
+
+			// Only lower the count if the item exists from the items to be deleted
+			if (itemIndex >= 0) {
+				$scope.shoppingList[i].count--;
+		
+				// If the count becomes zero, remove it from the shopping list
+				// Since this splices, need to go back on i to make sure it stays on the right place of the shopping list
+				if ($scope.shoppingList[i].count === 0) {
+					$scope.shoppingList.splice(i,1);
+					i--;
 				}
+			}
 		}
 		
 		console.log($scope.shoppingList);
@@ -123,6 +125,7 @@ mainApp.controller('generatorCtrl', ["$scope", "$http", function($scope, $http){
 			if ($scope.currentList[i].title == day){
 				var index = $scope.currentList[i].recipes.indexOf(item);
 				$scope.currentList[i].recipes.splice(index, 1);
+				break;
 			}
 		}
 	}
